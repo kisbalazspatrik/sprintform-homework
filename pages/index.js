@@ -50,7 +50,7 @@ export default function Home({ transactions }) {
     }
 
     return (
-        <DataContext.Provider value={{ filterData, setData }}>
+        <DataContext.Provider value={{ filterData }}>
         <div className="wrapper flex justify-center">
             <div className="max-w-6xl flex-grow">
                 <div className="flex justify-center flex-wrap">
