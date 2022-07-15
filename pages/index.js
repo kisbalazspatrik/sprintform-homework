@@ -7,16 +7,8 @@ import Item from "#/components/Item/Item";
 
 export const getStaticProps = async () => {
   /*
-  id
-  summary
-  category
-  sum
-  currency
-  paid
-
-  housing, travel, food, utilities, insurance, healthcare, financial, lifestyle, entertainment, miscellaneous
-
-  észrevétel: clothing category van, viszont nem kéne, hogy legyen?
+    Észrevétel: 'Clothing' mint kategória van a lekérdezett adatok között, viszont az 
+    oldalon az 'Összes lehetséges kategória' között nem szerepelt, így az ikonja is a 'Default' lesz.
   */
   const res = await fetch('https://development.sprintform.com/transactions.json');
   const data = await res.json();
