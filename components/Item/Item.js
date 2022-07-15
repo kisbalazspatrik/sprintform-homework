@@ -41,7 +41,7 @@ const Item = ({ id, category, summary, paid, sum, currency}) => {
                     className={isActive ? 'mt-3' : ''}
                     layout
                 >
-                    {isActive ? <div>További információ a vásárlásról, szerkesztés, stb.</div> : ' '}
+                    {isActive ? 'További információ a vásárlásról, szerkesztés, stb.' : ' '}
                 </motion.div>
             </motion.div>
         </AnimatePresence>
