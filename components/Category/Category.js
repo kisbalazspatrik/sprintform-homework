@@ -11,7 +11,7 @@ const Category = ({name, isActive }) => {
     }
 
     return (
-        <div id={name} className={`category-select ${isActive == name ? 'category-selected' : 'category-bg'}`} onClick={() => filterData(name)}><Icon category={name} w={24} h={24}/></div>
+        <div id={name} className={`category-select ${isActive == name ? 'category-selected' : 'category-bg'}`} onClick={isActive == name ? () => filterData(null) : () => filterData(name)}><Icon category={name} w={24} h={24}/></div>
     )
 }
 

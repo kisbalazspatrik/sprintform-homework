@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "#/components/Icon/Icon";
 import Category from "#/components/Category/Category";
 import DataContext from "#/utils/DataContext";
@@ -28,8 +28,14 @@ const formatSummary = (sum) => {
 
 export default function Home({ transactions }) {
 
-    const [data, setData] = useState(transactions);
+    const [data, setData] = useState([]);
     const [isActive, setIsActive] = useState("");
+
+    useEffect(() => {
+        setData(transactions.sort((a, b) => {
+            return new Date(b.paid) - new Date(a.paid);
+        }));
+    }, [])
 
     const filterData = (category) => {
         if (category) {
