@@ -53,7 +53,7 @@ export default function Home({ transactions }) {
         <DataContext.Provider value={{ filterData, setData }}>
         <div className="wrapper flex justify-center">
             <div className="max-w-6xl flex-grow">
-                <div className="flex justify-center">
+                <div className="flex justify-center flex-wrap">
                     <ModeSwitch/>
                     <Category name="housing" isActive={isActive}/>
                     <Category name="travel" isActive={isActive}/>
