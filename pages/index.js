@@ -69,6 +69,7 @@ export default function Home({ transactions }) {
                 </div>
                 {data.map(tx => (
                     <Item 
+                        key={tx.id}
                         id={tx.id} 
                         category={tx.category}
                         summary={tx.summary}
