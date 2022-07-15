@@ -4,21 +4,29 @@
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .category-select {
-  @apply flex items-center justify-center h-12 w-12 rounded-full text-white cursor-pointer mx-2 my-5;
+    @apply flex items-center justify-center h-12 w-12 rounded-full cursor-pointer mx-2 my-5 transition-all select-none;
+}
+
+.category-selected {
+    @apply bg-neutral-300 dark:bg-neutral-600;
+}
+
+.category-bg {
+    @apply bg-neutral-200 dark:bg-neutral-800;
 }

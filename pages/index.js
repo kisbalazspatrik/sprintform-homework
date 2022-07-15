@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Icon from "#/components/Icon/Icon";
 import Category from "#/components/Category/Category";
+import DataContext from "#/utils/DataContext";
+import ModeSwitch from "#/components/ModeSwitch/ModeSwitch";
+import Item from "#/components/Item/Item";
 
 export const getStaticProps = async () => {
   /*
@@ -34,42 +37,48 @@ const formatSummary = (sum) => {
 export default function Home({ transactions }) {
 
     const [data, setData] = useState(transactions);
+    const [isActive, setIsActive] = useState("");
 
     const filterData = (category) => {
-        setData(transactions.filter(transaction => transaction.category === category));
+        if (category) {
+            setIsActive(category)
+            setData(transactions.filter(transaction => transaction.category === category));
+        } else {
+            setIsActive("")
+            setData(transactions);
+        }
     }
 
     return (
+        <DataContext.Provider value={{ filterData, setData }}>
         <div className="wrapper flex justify-center">
             <div className="max-w-6xl flex-grow">
                 <div className="flex justify-center">
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("housing")}><Icon category={"housing"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("travel")}><Icon category={"travel"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("food")}><Icon category={"food"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("utilities")}><Icon category={"utilities"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("insurance")}><Icon category={"insurance"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("healthcare")}><Icon category={"healthcare"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("financial")}><Icon category={"financial"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("lifestyle")}><Icon category={"lifestyle"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("entertainment")}><Icon category={"entertainment"} w={24} h={24}/></div>
-                    <div className="category-select bg-neutral-200" onClick={() => filterData("miscellaneous")}><Icon category={"miscellaneous"} w={24} h={24}/></div>
-                    <div className="category-select bg-red-500" onClick={() => setData(transactions)}>X</div>
+                    <ModeSwitch/>
+                    <Category name="housing" isActive={isActive}/>
+                    <Category name="travel" isActive={isActive}/>
+                    <Category name="food" isActive={isActive}/>
+                    <Category name="utilities" isActive={isActive}/>
+                    <Category name="insurance" isActive={isActive}/>
+                    <Category name="healthcare" isActive={isActive}/>
+                    <Category name="financial" isActive={isActive}/>
+                    <Category name="lifestyle" isActive={isActive}/>
+                    <Category name="entertainment" isActive={isActive}/>
+                    <Category name="miscellaneous" isActive={isActive}/>
+                    <Category name="reset" isActive={isActive}/>
                 </div>
                 {data.map(tx => (
-                <div key={tx.id} className="bg-neutral-100 mb-3 p-5 border-l-8 border-neutral-500">
-                    <div className="flex items-center">
-                        <Icon category={tx.category} w={48} h={48}/>
-                        <div className="pl-5">
-                            <h1 className="font-bold">{tx.summary}</h1>
-                            <p>{formatDate(tx.paid)}</p>
-                        </div>
-                        <div className="ml-auto">
-                            <p className="font-bold">{formatSummary(tx.sum)} {tx.currency}</p>
-                        </div>
-                    </div>
-                </div>
+                    <Item 
+                        id={tx.id} 
+                        category={tx.category}
+                        summary={tx.summary}
+                        paid={formatDate(tx.paid)}
+                        sum={formatSummary(tx.sum)}
+                        currency={tx.currency}
+                    />
                 ))}
             </div>
         </div>
+        </DataContext.Provider>
     )
 }
